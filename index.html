@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Card Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Credit Card Checker</h1>
+    <p>Enter your card number:</p>
+    <input type="text" id="card-number-input">
+    <button id="check-button">Check Card Number</button>
+    <button id="make-valid-button">Make Invalid Number Valid</button>
+    <p id="result"></p>
+
+    
+    <script src="./main.js"></script>
+    <script>
+        // include validateCred(), findInvalidCards(), idInvalidCardCompanies(), convertStringToArray() and makeValid() functions here
+        
+        document.getElementById('check-button').addEventListener('click', function() {
+            var cardNumberStr = document.getElementById('card-number-input').value;
+            var cardNumber = convertStringToArray(cardNumberStr);
+            var result = validateCred(cardNumber) ? "This card is valid." : "This card is invalid.";
+            document.getElementById('result').textContent = result;
+        });
+
+        document.getElementById('make-valid-button').addEventListener('click', function() {
+            var cardNumberStr = document.getElementById('card-number-input').value;
+            var cardNumber = convertStringToArray(cardNumberStr);
+            if (!validateCred(cardNumber)) {
+                var validCardNumber = makeValid(cardNumber);
+                document.getElementById('result').textContent = "The valid card number is: " + validCardNumber.join('');
+                document.getElementById('card-number-input').value = validCardNumber.join('');
+            } else {
+                document.getElementById('result').textContent = "This card is already valid.";
+            }
+        });
+    </script>
+</body>
+</html>
